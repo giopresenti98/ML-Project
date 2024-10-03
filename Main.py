@@ -8,7 +8,7 @@ from Classifiers import knn
 nRows = 25000
 # Load the dataset
 data = pd.read_csv('Python\\4-Machine learning\Project\ML-Project\Dataset\data.csv',
-                   on_bad_lines='skip', nrows=nRows*2)
+                   on_bad_lines='skip', nrows=nRows*10)
 data_shuffled=data.sample(frac=1)
 # n_samples=int(len(data['password']))
 
