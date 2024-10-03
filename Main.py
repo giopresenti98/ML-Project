@@ -5,20 +5,20 @@ import numpy as np
 import Plot
 from Classifiers import knn
 
-nRowsRead = 10000
+nRows = 25000
 # Load the dataset
 data = pd.read_csv('Python\\4-Machine learning\Project\ML-Project\Dataset\data.csv',
-                   on_bad_lines='skip', nrows=nRowsRead)
-data.sample(frac=1)
+                   on_bad_lines='skip', nrows=nRows*2)
+data_shuffled=data.sample(frac=1)
 # n_samples=int(len(data['password']))
 
 # Generate features
-pass_length = (data['password'].str.len().values).T
-numeric = (data['password'].apply(lambda x: len([str(x)
-           for x in list(x) if str(x).isdigit()])).values).T
+pass_length = (data_shuffled['password'].str.len().head(nRows).values).T
+numeric = (data_shuffled['password'].apply(lambda x: len([str(x)
+           for x in list(x) if str(x).isdigit()])).head(nRows).values).T
 # Split the dataset into features and target variable
 xtr = np.array([pass_length, numeric]).T
-ytr = data['strength'].values
+ytr = data_shuffled['strength'].head(nRows).values
 
 print(xtr)
 print(xtr.shape)
