@@ -4,10 +4,12 @@ import numpy as np
 
 import Plot
 from Classifiers import knn
-
+import os
+dirname = os.path.dirname(__file__)
+filename = os.path.join(dirname, 'Dataset/data.csv')
 nRows = 25000
 # Load the dataset
-data = pd.read_csv('Python\\4-Machine learning\Project\ML-Project\Dataset\data.csv',
+data = pd.read_csv(filename,
                    on_bad_lines='skip', nrows=nRows*10)
 data_shuffled=data.sample(frac=1)
 # n_samples=int(len(data['password']))
