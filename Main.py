@@ -3,15 +3,11 @@ import pandas as pd
 
 # Load the dataset
 data = pd.read_csv('Python\\4-Machine learning\Project\ML-Project\Dataset\data.csv', on_bad_lines='skip')
-#data['password_length'] = data['password']
-#print(data['password'].values)
 
-#pass_length = len(data['password'].values)
+pass_length = []
+for i in data['password'].values:
 
-for i in data['password']:
-
-    pass_length = len(i)
-    data['password_length'] = pass_length
+    pass_length.append(len(str(i)))
 
 
 
@@ -19,7 +15,7 @@ for i in data['password']:
 xtr = pass_length
 ytr = data['strength'].values
 
-print(xtr[0])
+
 
 from sklearn.neighbors import KNeighborsClassifier
 
