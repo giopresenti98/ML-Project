@@ -5,19 +5,21 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 # Load the dataset
 data = pd.read_csv('Python\\4-Machine learning\Project\ML-Project\Dataset\data.csv', on_bad_lines='skip')
+lenght=len(data['password'])
+n_samples=int(lenght)
+pass_length=np.zeros(shape=(n_samples, 2))
+for i in range(n_samples):
+   pass_length[i,1]=len(str(data['password'].values[i]))
+for i in range(n_samples):
+   pass_length[i,0]=len(str(data['password'].values[i]))
 
-pass_length = []
-for i in data['password'].values:
-    pass_length.append(len(str(i)))
-
-
-
+print(pass_length)
 # Split the dataset into features and target variable
-xtr = np.array(pass_length).reshape(1, -1).T
-ytr = data['strength'].values
+xtr = np.array(pass_length)
+ytr = data['strength'].values 
 
-
-
+print(pass_length.shape)
+print(xtr.shape)
 clf=KNeighborsClassifier(n_neighbors=1)
 clf.fit(xtr,ytr)
 
@@ -54,3 +56,5 @@ def plot_decision_regions(classifier, x, y, resolution=0.02):
 
 
 plot_decision_regions(clf, xtr, ytr, resolution=0.1)
+
+plt.show()
