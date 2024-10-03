@@ -1,23 +1,21 @@
 import pandas as pd
 
+import numpy as np
 
+from sklearn.neighbors import KNeighborsClassifier
 # Load the dataset
 data = pd.read_csv('Python\\4-Machine learning\Project\ML-Project\Dataset\data.csv', on_bad_lines='skip')
 
 pass_length = []
 for i in data['password'].values:
-
     pass_length.append(len(str(i)))
 
 
 
 # Split the dataset into features and target variable
-xtr = pass_length
+xtr = np.array(pass_length).reshape(1, -1).T
 ytr = data['strength'].values
 
-
-
-from sklearn.neighbors import KNeighborsClassifier
 
 
 clf=KNeighborsClassifier(n_neighbors=1)
@@ -25,10 +23,10 @@ clf.fit(xtr,ytr)
 
 
 from matplotlib.colors import ListedColormap
-import numpy as np
+
 import matplotlib.pyplot as plt
 
-def plot_dataset(x, y):
+def plot_dataset(x, y): 
     colors = ['kx', 'bo', 'r.', 'g+', 'y', 'm', 'c']
     classes = np.unique(y)
     for i, k in enumerate(classes):
