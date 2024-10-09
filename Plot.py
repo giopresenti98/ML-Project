@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
 def plot_dataset(x, y):
     colors = ['kx', 'bo', 'r.', 'g+', 'y', 'm', 'c']
     classes = np.unique(y)
@@ -28,5 +29,7 @@ def plot_decision_regions(classifier, x, y, resolution=0.02):
     plot_dataset(x, y)
     plt.xlim(xx1.min(), xx1.max())
     plt.ylim(xx2.min(), xx2.max())
+    plt.xlabel('Feature 1')
+    plt.ylabel('Feature 2')
     plt.show()
     return

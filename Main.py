@@ -1,10 +1,9 @@
 import pandas as pd
-
-
 import Data
 import Plot
-from Classifiers import knn
+from Classifiers import knn, svm
 import os
+from sklearn.metrics import accuracy_score
 
 trainSamples = 10000
 
@@ -15,11 +14,15 @@ data = pd.read_csv(filename, on_bad_lines='skip')
 print(data)
 (xtr,ytr)=Data.feature_extractor(data,trainSamples)
 
-print(xtr)
-print(xtr.shape)
+
+
+#print(xtr)
+#print(xtr.shape)
 
 # Train the model
-clf = knn.train(xtr, ytr)
+clf = knn.knn_train(xtr, ytr)
+clf2 = svm.svm_train(xtr, ytr)
 
 # Plot the decision regions
 Plot.plot_decision_regions(clf, xtr, ytr, resolution=0.1)
+Plot.plot_decision_regions(clf2, xtr, ytr, resolution=0.1)
