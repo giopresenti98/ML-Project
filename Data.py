@@ -4,9 +4,12 @@ import numpy as np
 def feature_extractor(data, trainSamples):
     # Shuffle the dataset
     data_shuffled = data.sample(frac=1)
-    n_test = 2000 #int(len(data)-trainSamples)
+    n_test = (len(data)-trainSamples-1)
     # n_samples=int(len(data['password']))
     #print(data_shuffled['password'].head(trainSamples) )
+    
+    data_shuffled['password'] = data_shuffled['password'].astype(str)
+    
     # Generate features
     pass_length_train = (data_shuffled['password'].str.len().head(
         trainSamples).values).T
