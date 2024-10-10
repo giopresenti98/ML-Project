@@ -1,16 +1,29 @@
 import numpy as np
 
-def feature_extractor(data,trainSamples):
+
+def feature_extractor(data, trainSamples):
     # Shuffle the dataset
     data_shuffled = data.sample(frac=1)
 
     # n_samples=int(len(data['password']))
 
     # Generate features
-    pass_length = (data_shuffled['password'].str.len().head(trainSamples).values).T
-    numeric = (data_shuffled['password'].head(trainSamples).apply(lambda x: len([str(x) for x in list(x) if str(x).isdigit()]))).values.T
+    pass_length_train = (data_shuffled['password'].str.len().head(
+        trainSamples).values).T
+    numeric_train = (data_shuffled['password'].head(trainSamples).apply(
+        lambda x: len([str(x) for x in list(x) if str(x).isdigit()]))).values.T
+
+
+    pass_length_test = (data_shuffled['password'].str.len().tail(
+        len(data)-trainSamples).values).T
+    numeric_test = (data_shuffled['password'].tail(len(data)-trainSamples).apply(
+        lambda x: len([str(x) for x in list(x) if str(x).isdigit()]))).values.T
     
     # Split the dataset into features and target variable
-    xtr = np.array([pass_length, numeric]).T
+    xtr = np.array([pass_length_train, numeric_train]).T
     ytr = data_shuffled['strength'].head(trainSamples).values
-    return (xtr, ytr)
+
+    xts = np.array([pass_length_test, numeric_test]).T
+    yts = data_shuffled['strength'].tail(len(data)-trainSamples).values
+
+    return (xtr, ytr, xts, yts)
