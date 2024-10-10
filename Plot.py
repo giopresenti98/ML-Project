@@ -31,5 +31,6 @@ def plot_decision_regions(classifier, x, y, resolution=0.02):
     plt.ylim(xx2.min(), xx2.max())
     plt.xlabel('Feature 1')
     plt.ylabel('Feature 2')
+    #plt.scatter(x[:, 0], x[:, 1], c=y, cmap=cmap, marker='o', s=50)
     plt.show()
     return
