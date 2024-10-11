@@ -5,13 +5,13 @@ from Classifiers import knn, svm, kde
 import os
 from sklearn.metrics import accuracy_score
 
-trainSamples = 100
+n_train = 1000
 # Load the dataset
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, 'Dataset/data.csv')
 data = pd.read_csv(filename, on_bad_lines='skip')
 print(data)
-(xtr, ytr, xts, yts)=Data.feature_extractor(data,trainSamples)
+(xtr, ytr, xts, yts)=Data.feature_extractor(data,n_train)
 
 
 
