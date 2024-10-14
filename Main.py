@@ -1,7 +1,7 @@
 import pandas as pd
 import Data
 import Plot
-from Classifiers import knn, svm, kde
+from Classifiers import knn, svm, kde, gnb
 import os
 from sklearn.metrics import accuracy_score
 
