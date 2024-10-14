@@ -2,8 +2,6 @@ from matplotlib.colors import ListedColormap
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-
 def plot_dataset(x, y):
     colors = ['kx', 'bo', 'r.', 'g+', 'y', 'm', 'c']
     classes = np.unique(y)
@@ -11,7 +9,7 @@ def plot_dataset(x, y):
         plt.plot(x[y == k, 0], x[y == k, 1], colors[i])
 
 
-def plot_decision_regions(classifier, x, y, resolution=0.02):
+def plot_decision_regions(classifier, x, y, resolution=0.02, title=None, accuracy=None):
     # setup marker generator and color map
     colors = ('black', 'blue', 'red', 'lightgreen',
               'yellow', 'magenta', 'cyan')
@@ -29,8 +27,8 @@ def plot_decision_regions(classifier, x, y, resolution=0.02):
     plot_dataset(x, y)
     plt.xlim(xx1.min(), xx1.max())
     plt.ylim(xx2.min(), xx2.max())
-    plt.xlabel('Feature 1')
-    plt.ylabel('Feature 2')
-    #plt.scatter(x[:, 0], x[:, 1], c=y, cmap=cmap, marker='o', s=50)
+    plt.xlabel('Lenght of Password')
+    plt.ylabel('Numbers in Password')
+    plt.title(title, accuracy)
     plt.show()
     return
