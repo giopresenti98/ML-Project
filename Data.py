@@ -23,9 +23,9 @@ def feature_extractor(data, n_train):
         n_test).values).T
     numeric_test = (data_shuffled['password'].tail(n_test).apply(
         lambda x: len([str(x) for x in list(x) if str(x).isdigit()]))).values.T
-    letter_test = (data_shuffled['password'].head(n_test).apply(
+    letter_test = (data_shuffled['password'].tail(n_test).apply(
         lambda x: len([str(x) for x in list(x) if str(x).isalpha()]))).values.T
-    upper_test = (data_shuffled['password'].head(n_test).apply(
+    upper_test = (data_shuffled['password'].tail(n_test).apply(
         lambda x: len([str(x) for x in list(x) if str(x).isupper()]))).values.T
     
 
