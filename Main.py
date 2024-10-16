@@ -23,14 +23,14 @@ clf2 = svm.svm_train(xtr, ytr)
 clf3 = dt.dt_train(xtr, ytr)
 clf4 = gnb.gnb_train(xtr, ytr)
 
-#Accuracy of the models...
+# Accuracy of the models...
 
 print('KNN Accuracy: ', accuracy_score(yts, clf.predict(xts)))
 print('SVM Accuracy: ', accuracy_score(yts, clf2.predict(xts)))
 print('DT Accuracy: ', accuracy_score(yts, clf3.predict(xts)))
 print('GNB Accuracy: ', accuracy_score(yts, clf4.predict(xts)))
 
-#Histogram of the features...
+# Histogram of the features...
 
 tick = time.perf_counter()
 Plot.feature_importance_histogram(clf, xtr, ytr, title='KNN')
@@ -49,10 +49,9 @@ Plot.feature_importance_histogram(clf4, xtr, ytr, title='GNB')
 tock4 = time.perf_counter()
 print('Elapsed Time: ', tock4-tick4)
 
-#Plot the dataset with decision regions...
+# Plot the dataset with decision regions...
 
-#Plot.plot_decision_regions(clf, xts, yts, resolution=0.1, title='KNN, Accuracy: ' + str(accuracy_score(yts, clf.predict(xts))))
-#Plot.plot_decision_regions(clf2, xtr, ytr, resolution=0.1, title='SVM, Accuracy: ' + str(accuracy_score(yts, clf2.predict(xts))))
-#Plot.plot_decision_regions(clf3, xtr, ytr, resolution=0.1, title='DT, Accuracy: ' + str(accuracy_score(yts, clf3.predict(xts))))
-#Plot.plot_decision_regions(clf4, xtr, ytr, resolution=0.1, title='GNB, Accuracy: ' + str(accuracy_score(yts, clf4.predict(xts))))
- 
+# Plot.plot_decision_regions(clf, xts, yts, resolution=0.1, title='KNN, Accuracy: ' + str(accuracy_score(yts, clf.predict(xts))))
+# Plot.plot_decision_regions(clf2, xtr, ytr, resolution=0.1, title='SVM, Accuracy: ' + str(accuracy_score(yts, clf2.predict(xts))))
+# Plot.plot_decision_regions(clf3, xtr, ytr, resolution=0.1, title='DT, Accuracy: ' + str(accuracy_score(yts, clf3.predict(xts))))
+# Plot.plot_decision_regions(clf4, xtr, ytr, resolution=0.1, title='GNB, Accuracy: ' + str(accuracy_score(yts, clf4.predict(xts))))
