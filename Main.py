@@ -29,13 +29,6 @@ print('SVM Accuracy: ', accuracy_score(yts, clf2.predict(xts)))
 print('DT Accuracy: ', accuracy_score(yts, clf3.predict(xts)))
 print('GNB Accuracy: ', accuracy_score(yts, clf4.predict(xts)))
 
-#Plot the dataset in three dimensions, test...
-
-#Plot.plot_dataset_threeD(clf, xtr, ytr, title='KNN, Accuracy: ' + str(accuracy_score(yts, clf.predict(xts))))
-#Plot.plot_dataset_threeD(clf2, xtr, ytr, title='SVM, Accuracy: ' + str(accuracy_score(yts, clf2.predict(xts))))
-#Plot.plot_dataset_threeD(clf3, xtr, ytr, title='DT, Accuracy: ' + str(accuracy_score(yts, clf3.predict(xts))))
-#Plot.plot_dataset_threeD(clf4, xtr, ytr, title='GNB, Accuracy: ' + str(accuracy_score(yts, clf4.predict(xts))))
-
 #Histogram of the features...
 
 #Plot.feature_importance_histogram(clf, xtr, ytr)
