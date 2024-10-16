@@ -5,7 +5,6 @@ from Classifiers import knn, svm, gnb, dt
 import os
 from sklearn.metrics import accuracy_score
 
-
 # Load the dataset
 
 n_train = 400000
