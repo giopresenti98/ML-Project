@@ -15,13 +15,15 @@ data = pd.read_csv(filename, on_bad_lines='skip')
 # Train the model
 
 clf = knn.knn_train(xtr, ytr)
-clf2 = svm.svm_train(xtr, ytr)
-clf3 = dt.dt_train(xtr, ytr)
-clf4 = gnb.gnb_train(xtr, ytr)
-print("Accuracy of KNN: ", accuracy_score(yts, clf.predict(xts)))
-print("Accuracy of SVM: ", accuracy_score(yts, clf2.predict(xts)))
-print("Accuracy of DT: ", accuracy_score(yts, clf3.predict(xts)))
-print("Accuracy of GNB: ", accuracy_score(yts, clf4.predict(xts)))
+#clf2 = svm.svm_train(xtr, ytr)
+#clf3 = dt.dt_train(xtr, ytr)
+#clf4 = gnb.gnb_train(xtr, ytr)
+#print("Accuracy of KNN: ", accuracy_score(yts, clf.predict(xts)))
+#print("Accuracy of SVM: ", accuracy_score(yts, clf2.predict(xts)))
+#print("Accuracy of DT: ", accuracy_score(yts, clf3.predict(xts)))
+#print("Accuracy of GNB: ", accuracy_score(yts, clf4.predict(xts)))
+
+Plot.ddd_plot_decision_regions(clf, xts, yts, resolution=0.1, title='KNN, Accuracy: ' + str(accuracy_score(yts, clf.predict(xts))))
 
 # Plot the decision regions
 
