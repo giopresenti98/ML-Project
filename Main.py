@@ -4,15 +4,16 @@ import Plot
 from Classifiers import knn, svm, gnb, dt
 import os
 from sklearn.metrics import accuracy_score
+import time
 
 # Load the dataset
 
-n_train = 400000
+n_train = 40000
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, 'Dataset/data.csv')
 data = pd.read_csv(filename, on_bad_lines='skip')
 print(data)
-xtr, ytr, xts, yts = Data.feature_extractor(data,n_train)
+xtr, ytr, xts, yts = Data.feature_extractor(data, n_train)
 
 
 # Train the model
@@ -31,10 +32,22 @@ print('GNB Accuracy: ', accuracy_score(yts, clf4.predict(xts)))
 
 #Histogram of the features...
 
-#Plot.feature_importance_histogram(clf, xtr, ytr)
-#Plot.feature_importance_histogram(clf2, xtr, ytr)
-#Plot.feature_importance_histogram(clf3, xtr, ytr)
-#Plot.feature_importance_histogram(clf4, xtr, ytr)
+tick = time.perf_counter()
+Plot.feature_importance_histogram(clf, xtr, ytr, title='KNN')
+tock = time.perf_counter()
+print('Elapsed Time: ', tock-tick)
+tick1 = time.perf_counter()
+Plot.feature_importance_histogram(clf2, xtr, ytr, title='SVM')
+tock2 = time.perf_counter()
+print('Elapsed Time: ', tock2-tick1)
+tick3 = time.perf_counter()
+Plot.feature_importance_histogram(clf3, xtr, ytr, title='DT')
+tock3 = time.perf_counter()
+print('Elapsed Time: ', tock3-tick3)
+tick4 = time.perf_counter()
+Plot.feature_importance_histogram(clf4, xtr, ytr, title='GNB')
+tock4 = time.perf_counter()
+print('Elapsed Time: ', tock4-tick4)
 
 #Plot the dataset with decision regions...
 

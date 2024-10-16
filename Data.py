@@ -3,7 +3,7 @@ import numpy as np
 
 def feature_extractor(data, n_train):
     # Shuffle the dataset
-    data_shuffled = data.sample(frac=1)
+    data_shuffled = data#.sample(frac=1)
     n_test = (len(data)-n_train)
     
     data_shuffled['password'] = data_shuffled['password'].astype(str)

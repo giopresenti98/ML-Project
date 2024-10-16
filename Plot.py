@@ -38,7 +38,7 @@ def plot_decision_regions(classifier, x, y, resolution=0.02, title=None, accurac
     plt.show()
     return
 
-def feature_importance_histogram(classifier, X, y):
+def feature_importance_histogram(classifier, X, y, title=None):
     colors = ['black', 'blue', 'red', 'lightgreen', 'yellow', 'magenta', 'cyan']
     
     results = permutation_importance(classifier, X, y, scoring='accuracy')
@@ -50,7 +50,7 @@ def feature_importance_histogram(classifier, X, y):
             tick_label=[x for x in range(len(importances))], 
             color=colors, edgecolor='black', linewidth=1.2, alpha=0.7)
     plt.xlabel('Feature')
-    plt.ylabel('Score', )
-    plt.title('Feature Importance')
+    plt.ylabel('Importance Score')
+    plt.title() = title
     plt.legend()
     plt.show()
