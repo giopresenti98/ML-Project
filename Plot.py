@@ -34,7 +34,6 @@ def plot_decision_regions(classifier, x, y, resolution=0.02, title=None, accurac
     plt.xlabel('Lenght of Password')
     plt.ylabel('Numbers in Password')
     plt.title(title, accuracy)
-    plt.legend()
     plt.show()
     return
 
@@ -51,6 +50,6 @@ def feature_importance_histogram(classifier, X, y, title=None):
             color=colors, edgecolor='black', linewidth=1.2, alpha=0.7)
     plt.xlabel('Feature')
     plt.ylabel('Importance Score')
-    plt.title() = title
+    plt.title(title)
     plt.legend()
     plt.show()
