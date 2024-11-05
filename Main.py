@@ -4,7 +4,6 @@ import Plot
 from Classifiers import knn, svm, gnb, dt
 import os
 from sklearn.metrics import accuracy_score
-import time
 
 # Load the dataset
 
@@ -22,39 +21,11 @@ SupportVector = svm.svm_train(xtr, ytr)
 DecisionTree = dt.dt_train(xtr, ytr)
 Gaussian = gnb.gnb_train(xtr, ytr)
 
-#Accuracy of the models...
+clfs = [KNeigbours, SupportVector, DecisionTree, Gaussian]
 
-#print('KNN Accuracy: ', accuracy_score(yts, clf.predict(xts)))
-#print('SVM Accuracy: ', accuracy_score(yts, clf2.predict(xts)))
-#print('DT Accuracy: ', accuracy_score(yts, clf3.predict(xts)))
-#print('GNB Accuracy: ', accuracy_score(yts, clf4.predict(xts)))
+#Histogram of the features and accuracy...
 
-#Histogram of the features...
-
-def plot_histogram():
-
-    clfs = [KNeigbours, SupportVector, DecisionTree, Gaussian]
-    for clf in clfs:
-        print(f'Accuracy of: {clf}', accuracy_score(yts, clf.predict(xts)))
-        tick = time.perf_counter()
-        Plot.feature_importance_histogram(clf, xtr, ytr, title=f'{clf}')
-        tock = time.perf_counter()
-        print('Elapsed Time: ', tock-tick)
-
-plot_histogram()
-
-#tick1 = time.perf_counter()
-#Plot.feature_importance_histogram(clf2, xtr, ytr, title='SVM')
-#tock2 = time.perf_counter()
-#print('Elapsed Time: ', tock2-tick1)
-#tick3 = time.perf_counter()
-#Plot.feature_importance_histogram(clf3, xtr, ytr, title='DT')
-#tock3 = time.perf_counter()
-#print('Elapsed Time: ', tock3-tick3)
-#tick4 = time.perf_counter()
-#Plot.feature_importance_histogram(clf4, xtr, ytr, title='GNB')
-#tock4 = time.perf_counter()
-#print('Elapsed Time: ', tock4-tick4)
+Plot.plot_histogram(clfs, xtr, xts, ytr, yts)
 
 #Plot the dataset with decision regions...
 

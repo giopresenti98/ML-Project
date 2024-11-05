@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn.inspection import permutation_importance
+import time
+from sklearn.metrics import accuracy_score
 
 def plot_dataset(x, y):
     colors = ['kx', 'bo', 'r.', 'g+', 'y', 'm', 'c']
@@ -51,5 +53,15 @@ def feature_importance_histogram(classifier, X, y, title=None):
     plt.xlabel('Feature')
     plt.ylabel('Importance Score')
     plt.title(title)
-    plt.legend()
     plt.show()
+
+def plot_histogram(clfs, xtr, xts, ytr, yts):
+
+    for clf in clfs:
+        print(f'Accuracy of: {clf}', accuracy_score(yts, clf.predict(xts)))
+        tick = time.perf_counter()
+        feature_importance_histogram(clf, xtr, ytr, title=f'{clf}')
+        tock = time.perf_counter()
+        print('Elapsed Time: ', tock-tick)
+
+    return
