@@ -42,8 +42,11 @@ def plot_decision_regions(classifier, x, y, resolution=0.02, title=None, accurac
 def feature_importance_histogram(classifier, X, y, title=None):
     colors = ['black', 'blue', 'red', 'lightgreen', 'yellow', 'magenta', 'cyan']
     
+    tick = time.perf_counter()
     results = permutation_importance(classifier, X, y, scoring='accuracy')
     importances = results.importances_mean
+    tock = time.perf_counter()
+    print(f'Elapsed Time for {classifier}: ', tock-tick)
 
     #for i, v in enumerate(importances):
     #    print('Feature: %0d, Score: %.5f' % (i, v))
@@ -58,10 +61,8 @@ def feature_importance_histogram(classifier, X, y, title=None):
 def plot_histogram(clfs, xtr, xts, ytr, yts):
 
     for clf in clfs:
-        print(f'Accuracy of: {clf}', accuracy_score(yts, clf.predict(xts)))
-        tick = time.perf_counter()
+        #For every classifier, plot the feature importance histogram...
         feature_importance_histogram(clf, xtr, ytr, title=f'{clf}')
-        tock = time.perf_counter()
-        print('Elapsed Time: ', tock-tick)
+        print(f'Accuracy of: {clf}', accuracy_score(yts, clf.predict(xts)))
 
     return
