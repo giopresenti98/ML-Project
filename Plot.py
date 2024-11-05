@@ -1,10 +1,10 @@
 from matplotlib.colors import ListedColormap
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 from sklearn.inspection import permutation_importance
-import time
 from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+import numpy as np
+import time
+
 
 def plot_dataset(x, y):
     colors = ['kx', 'bo', 'r.', 'g+', 'y', 'm', 'c']
@@ -48,8 +48,6 @@ def feature_importance_histogram(classifier, X, y, title=None):
     tock = time.perf_counter()
     print(f'Elapsed Time for {classifier}: ', tock-tick)
 
-    #for i, v in enumerate(importances):
-    #    print('Feature: %0d, Score: %.5f' % (i, v))
     plt.bar([x for x in range(len(importances))], importances, 
             tick_label=[x for x in range(len(importances))], 
             color=colors, edgecolor='black', linewidth=1.2, alpha=0.7)

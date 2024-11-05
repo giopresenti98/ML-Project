@@ -1,9 +1,8 @@
-import pandas as pd
-import Data
-import Plot
 from Classifiers import knn, svm, gnb, dt
-import os
 from sklearn.metrics import accuracy_score
+import pandas as pd
+import Data, Plot
+import os
 
 # Load the dataset
 
