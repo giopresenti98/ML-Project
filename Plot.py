@@ -12,10 +12,11 @@ def plot_dataset(x, y):
     for i, k in enumerate(classes):
         plt.plot(x[y == k, 0], x[y == k, 1], colors[i])
 
-#Plot the dataset...
+# Plot the dataset...
+
 
 def plot_decision_regions(classifier, x, y, resolution=0.02, title=None, accuracy=None):
-    
+
     # setup marker generator and color map
     colors = ('black', 'blue', 'red', 'lightgreen',
               'yellow', 'magenta', 'cyan')
@@ -39,28 +40,34 @@ def plot_decision_regions(classifier, x, y, resolution=0.02, title=None, accurac
     plt.show()
     return
 
+
 def feature_importance_histogram(classifier, X, y, title=None):
-    colors = ['black', 'blue', 'red', 'lightgreen', 'yellow', 'magenta', 'cyan']
-    
-    tick = time.perf_counter()
+    colors = ['black', 'blue', 'red',
+              'lightgreen', 'yellow', 'magenta', 'cyan']
+
+
     results = permutation_importance(classifier, X, y, scoring='accuracy')
     importances = results.importances_mean
-    tock = time.perf_counter()
-    print(f'Elapsed Time for {classifier}: ', tock-tick)
+    
 
-    plt.bar([x for x in range(len(importances))], importances, 
-            tick_label=[x for x in range(len(importances))], 
+    plt.bar([x for x in range(len(importances))], importances,
+            tick_label=[x for x in range(len(importances))],
             color=colors, edgecolor='black', linewidth=1.2, alpha=0.7)
     plt.xlabel('Feature')
     plt.ylabel('Importance Score')
     plt.title(title)
     plt.show()
 
-def plot_histogram(clfs, xtr, xts, ytr, yts):
+
+def results(clfs, xtr, xts, ytr, yts):
 
     for clf in clfs:
-        #For every classifier, plot the feature importance histogram...
+        # For every classifier, plot the feature importance histogram...
         feature_importance_histogram(clf, xtr, ytr, title=f'{clf}')
-        print(f'Accuracy of: {clf}', accuracy_score(yts, clf.predict(xts)))
+        tic = time.perf_counter()
+        predictions = clf.predict(xts)
+        toc = time.perf_counter()
+        print(f'Elapsed Time for prediction {clf}: ', toc-tic)
+        print(f'Accuracy of: {clf}', accuracy_score(yts, predictions))
 
     return

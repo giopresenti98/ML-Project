@@ -1,8 +1,10 @@
 from Classifiers import knn, svm, gnb, dt
 from sklearn.metrics import accuracy_score
 import pandas as pd
-import Data, Plot
+import Data
+import Plot
 import os
+import time
 
 # Load the dataset
 
@@ -14,22 +16,40 @@ print(data)
 xtr, ytr, xts, yts = Data.feature_extractor(data, n_train)
 
 # Train the model
-
+tic = time.perf_counter()
 KNeigbours = knn.knn_train(xtr, ytr)
+toc = time.perf_counter()
+print(f'----Elapsed Time for training KNN: ', toc-tic)
+
+tic = time.perf_counter()
 SupportVector = svm.svm_train(xtr, ytr)
-DecisionTree = dt.dt_train(xtr, ytr)
+toc = time.perf_counter()
+print(f'----Elapsed Time for training SVM: ', toc-tic)
+
+tic = time.perf_counter()
+DecisionTreeC = dt.dtc_train(xtr, ytr)
+toc = time.perf_counter()
+print(f'----Elapsed Time for training DTC: ', toc-tic)
+
+tic = time.perf_counter()
 Gaussian = gnb.gnb_train(xtr, ytr)
+toc = time.perf_counter()
+print(f'----Elapsed Time for training GNB: ', toc-tic)
 
-clfs = [KNeigbours, SupportVector, DecisionTree, Gaussian]
+tic = time.perf_counter()
+DecisionTreeR = dt.dtr_train(xtr, ytr)
+toc = time.perf_counter()
+print(f'----Elapsed Time for training DTR: ', toc-tic)
 
-#Histogram of the features and accuracy...
+clfs = [KNeigbours, SupportVector, DecisionTreeC, DecisionTreeR, Gaussian]
 
-Plot.plot_histogram(clfs, xtr, xts, ytr, yts)
+# Histogram of the features and accuracy...
 
-#Plot the dataset with decision regions...
+Plot.results(clfs, xtr, xts, ytr, yts)
 
-#Plot.plot_decision_regions(clf, xts, yts, resolution=0.1, title='KNN, Accuracy: ' + str(accuracy_score(yts, clf.predict(xts))))
-#Plot.plot_decision_regions(clf2, xtr, ytr, resolution=0.1, title='SVM, Accuracy: ' + str(accuracy_score(yts, clf2.predict(xts))))
-#Plot.plot_decision_regions(clf3, xtr, ytr, resolution=0.1, title='DT, Accuracy: ' + str(accuracy_score(yts, clf3.predict(xts))))
-#Plot.plot_decision_regions(clf4, xtr, ytr, resolution=0.1, title='GNB, Accuracy: ' + str(accuracy_score(yts, clf4.predict(xts))))
- 
+# Plot the dataset with decision regions...
+
+# Plot.plot_decision_regions(clf, xts, yts, resolution=0.1, title='KNN, Accuracy: ' + str(accuracy_score(yts, clf.predict(xts))))
+# Plot.plot_decision_regions(clf2, xtr, ytr, resolution=0.1, title='SVM, Accuracy: ' + str(accuracy_score(yts, clf2.predict(xts))))
+# Plot.plot_decision_regions(clf3, xtr, ytr, resolution=0.1, title='DT, Accuracy: ' + str(accuracy_score(yts, clf3.predict(xts))))
+# Plot.plot_decision_regions(clf4, xtr, ytr, resolution=0.1, title='GNB, Accuracy: ' + str(accuracy_score(yts, clf4.predict(xts))))
