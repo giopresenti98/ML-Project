@@ -41,12 +41,9 @@ def plot_decision_regions(classifier, x, y, resolution=0.02, title=None, accurac
     return
 
 
-def feature_importance_histogram(classifier, X, y, title=None):
+def feature_importance_histogram(importances, title=None):
     colors = ['black', 'blue', 'red',
               'lightgreen', 'yellow', 'magenta', 'cyan']
-
-    results = permutation_importance(classifier, X, y, scoring='accuracy')
-    importances = results.importances_mean
 
     plt.bar([x for x in range(len(importances))], importances,
             tick_label=[x for x in range(len(importances))],
@@ -76,7 +73,11 @@ def results(clfs, xtr, xts, ytr, yts):
 
         print(f'Accuracy score:\t {accuracy_score(yts, predictions):.4f}')
 
-        # feature_importance_histogram(clf, xtr, ytr, title=f'{clf}')
+        results = permutation_importance(clf, xtr, ytr, scoring='accuracy')
+        importances = results.importances_mean
+        print(f'Feature importance: {importances}')
+
+        # feature_importance_histogram(importances, title=f'{clf}')
 
         
 
