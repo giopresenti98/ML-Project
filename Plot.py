@@ -45,10 +45,8 @@ def feature_importance_histogram(classifier, X, y, title=None):
     colors = ['black', 'blue', 'red',
               'lightgreen', 'yellow', 'magenta', 'cyan']
 
-
     results = permutation_importance(classifier, X, y, scoring='accuracy')
     importances = results.importances_mean
-    
 
     plt.bar([x for x in range(len(importances))], importances,
             tick_label=[x for x in range(len(importances))],
@@ -63,11 +61,23 @@ def results(clfs, xtr, xts, ytr, yts):
 
     for clf in clfs:
         # For every classifier, plot the feature importance histogram...
-        feature_importance_histogram(clf, xtr, ytr, title=f'{clf}')
+        print('\n')
+
+        print(f"---\t{clf}\t---")
+        tic = time.perf_counter()
+        clf.fit(xtr, ytr)
+        toc = time.perf_counter()
+        print(f'Training time:\t {toc-tic:.4f} seconds')
+
         tic = time.perf_counter()
         predictions = clf.predict(xts)
         toc = time.perf_counter()
-        print(f'Elapsed Time for prediction {clf}: ', toc-tic)
-        print(f'Accuracy of: {clf}', accuracy_score(yts, predictions))
+        print(f'Prediction time: {toc-tic:.4f} seconds')
+
+        print(f'Accuracy score:\t {accuracy_score(yts, predictions):.4f}')
+
+        # feature_importance_histogram(clf, xtr, ytr, title=f'{clf}')
+
+        
 
     return
