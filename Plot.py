@@ -77,7 +77,7 @@ def results(clfs, xtr, xts, ytr, yts):
         importances = results.importances_mean
         print(f'Feature importance: {importances}')
 
-        # feature_importance_histogram(importances, title=f'{clf}')
+        feature_importance_histogram(importances, title=f'{clf}')
 
         
 

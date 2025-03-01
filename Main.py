@@ -10,12 +10,17 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # Load the dataset
 
-n_train = 40000
+
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, 'Dataset/data.csv')
 data = pd.read_csv(filename, on_bad_lines='skip')
 # print(data)
-xtr, ytr, xts, yts = Data.feature_extractor(data, n_train)
+
+n_train = 10000
+#n_test = (len(data)-n_train)
+n_test = 10000
+
+xtr, ytr, xts, yts = Data.feature_extractor(data, n_train, n_test)
 
 
 # Train the model
