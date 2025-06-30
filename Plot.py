@@ -1,10 +1,6 @@
 from matplotlib.colors import ListedColormap
-from sklearn.inspection import permutation_importance
-from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 import numpy as np
-import time
-
 
 def plot_dataset(x, y):
     colors = ['kx', 'bo', 'r.', 'g+', 'y', 'm', 'c']
@@ -54,31 +50,6 @@ def feature_importance_histogram(importances, title=None):
     plt.show()
 
 
-def train_and_test(clfs, xtr, xts, ytr, yts):
 
-    for clf in clfs:
-        # For every classifier, plot the feature importance histogram...
-        print('\n')
 
-        print(f"---\t{clf}\t---")
-        tic = time.perf_counter()
-        clf.fit(xtr, ytr)
-        toc = time.perf_counter()
-        print(f'Training time:\t {toc-tic:.4f} seconds')
-
-        tic = time.perf_counter()
-        predictions = clf.predict(xts)
-        toc = time.perf_counter()
-        print(f'Prediction time: {toc-tic:.4f} seconds')
-
-        print(f'Accuracy score:\t {accuracy_score(yts, predictions):.4f}')
-
-        results = permutation_importance(clf, xtr, ytr, scoring='accuracy')
-        importances = results.importances_mean
-        print(f'Feature importance: {importances}')
-
-        feature_importance_histogram(importances, title=f'{clf}')
-
-        
-
-    return
+  
