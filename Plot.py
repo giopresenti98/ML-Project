@@ -54,7 +54,7 @@ def feature_importance_histogram(importances, title=None):
     plt.show()
 
 
-def results(clfs, xtr, xts, ytr, yts):
+def train_and_test(clfs, xtr, xts, ytr, yts):
 
     for clf in clfs:
         # For every classifier, plot the feature importance histogram...
