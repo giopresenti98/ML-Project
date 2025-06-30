@@ -6,17 +6,13 @@ from sklearn.svm import SVC
 from sklearn.inspection import permutation_importance
 import pandas as pd
 import data as dt
-import data_l as dtl
 import plot
 import os
 import time
 from sklearn.metrics import accuracy_score
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.metrics import confusion_matrix
 
 N_TRAIN = 500
-N_TEST = 500000  # n_test = len(data) - n_train
+N_TEST = 50000  # n_test = len(data) - n_train
 
 
 # Load the dataset
@@ -25,8 +21,7 @@ filename = os.path.join(dirname, 'Dataset/data.csv')
 data = pd.read_csv(filename, on_bad_lines='skip')
 # print(data)
 
-#xtr, ytr, xts, yts = dt.feature_extractor(data, N_TRAIN, N_TEST)
-xtr, ytr, xts, yts = dtl.feature_extractor(data, N_TRAIN, N_TEST)
+xtr, ytr, xts, yts = dt.feature_extractor(data, N_TRAIN, N_TEST)
 
 # Define the classifiers
 KNN_clf = KNeighborsClassifier(n_neighbors=6)
@@ -40,16 +35,9 @@ SGD_reg = SGDClassifier(loss="hinge", penalty="l2")
 # List of classifiers to be trained and tested
 clfs = [KNN_clf, SVM_clf, DT_clf, DT_reg, GNB_clf, SGD_reg]
 
-# Function to plot the confusion matrix
-def plot_confusion_matrix(y_test,y_pred,classifier_name):
-    plt.figure(figsize=(5,5))
-    plt.title('Confusion Matrix of ' + classifier_name)
-    cm=confusion_matrix(y_test,y_pred)
-    sns.heatmap(cm,annot=True,fmt='d')
-    plt.xlabel('Predicted')
-    plt.ylabel('Truth')
-    plt.show()
-"""
+#plot.plot_dataset(xtr, ytr)
+#plot.plot_dataset(xts, yts)
+
 # Histogram of the features and accuracy
 for clf in clfs:
 
@@ -60,6 +48,7 @@ for clf in clfs:
     clf.fit(xtr, ytr)
     toc = time.perf_counter()
     print(f'Training time:\t {toc-tic:.4f} seconds')
+
 
     tic = time.perf_counter()
     predictions = clf.predict(xts)
@@ -78,11 +67,4 @@ for clf in clfs:
     print(f'Uppercase letters in password: {importances[3]:.4f}')
 
     plot.feature_importance_histogram(importances, title=f'{clf}')
-    plot_confusion_matrix(yts, predictions, clf.__class__.__name__)
-"""
-# Plot the dataset with decision regions
-
-plot.plot_decision_regions(KNN_clf, xts, yts, resolution=0.1, title='KNN')
-plot.plot_decision_regions(SVM_clf, xtr, ytr, resolution=0.1, title='SVM')
-plot.plot_decision_regions(DT_clf, xtr, ytr, resolution=0.1, title='DT')
-plot.plot_decision_regions(GNB_clf, xtr, ytr, resolution=0.1, title='GNB')
+    plot.plot_confusion_matrix(yts, predictions, clf.__class__.__name__)
