@@ -36,7 +36,6 @@ def plot_decision_regions(classifier, x, y, resolution=0.02, title=None, accurac
     plt.show()
     return
 
-
 def feature_importance_histogram(importances, title=None):
     colors = ['black', 'blue', 'red',
               'lightgreen', 'yellow', 'magenta', 'cyan']
