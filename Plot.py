@@ -48,8 +48,4 @@ def feature_importance_histogram(importances, title=None):
     plt.ylabel('Importance Score')
     plt.title(title)
     plt.show()
-
-
-
-
   
