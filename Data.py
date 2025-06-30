@@ -21,7 +21,6 @@ def feature_extractor(data, n_train, n_test):
     symbols_train_norm = symbols_train / np.where(pass_length_train == 0, 1, pass_length_train)
     upper_train_norm = upper_train / np.where(pass_length_train == 0, 1, pass_length_train)
 
-
     pass_length_test = data_shuffled['password'].str.len().tail(n_test).values
     numeric_test = data_shuffled['password'].tail(n_test).apply(
         lambda x: len([c for c in x if c.isdigit()])).values

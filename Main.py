@@ -1,4 +1,4 @@
-from sklearn import naive_bayes
+from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import SGDClassifier
@@ -34,7 +34,7 @@ SVM_clf = SVC(kernel="rbf")
 DT_clf = DecisionTreeClassifier(
     criterion='entropy', max_depth=3, random_state=0)
 DT_reg = DecisionTreeRegressor()
-GNB_clf = naive_bayes.GaussianNB()
+GNB_clf = GaussianNB()
 SGD_reg = SGDClassifier(loss="hinge", penalty="l2", max_iter=5)
 
 # List of classifiers to be trained and tested
