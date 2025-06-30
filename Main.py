@@ -7,8 +7,11 @@ from sklearn.inspection import permutation_importance
 import pandas as pd
 import data as dt
 import plot
-from train_and_test import train_and_test
+
 import os
+
+import time
+from sklearn.metrics import accuracy_score
 
 
 # Load the dataset
@@ -28,7 +31,8 @@ xtr, ytr, xts, yts = dt.feature_extractor(data, n_train, n_test)
 # Define the classifiers
 KNN_clf = KNeighborsClassifier(n_neighbors=6)
 SVM_clf = SVC(kernel="rbf")
-DT_clf = DecisionTreeClassifier(criterion='entropy', max_depth=3, random_state=0)
+DT_clf = DecisionTreeClassifier(
+    criterion='entropy', max_depth=3, random_state=0)
 DT_reg = DecisionTreeRegressor()
 GNB_clf = naive_bayes.GaussianNB()
 SGD_reg = SGDClassifier(loss="hinge", penalty="l2", max_iter=5)
@@ -38,9 +42,23 @@ clfs = [KNN_clf, SVM_clf, DT_clf, DT_reg, GNB_clf, SGD_reg]
 
 # Histogram of the features and accuracy
 for clf in clfs:
-    
-    train_and_test(clf, xtr, xts, ytr, yts)
-    
+
+    # For every classifier, plot the feature importance histogram...
+    print('\n')
+
+    print(f"---\t{clf}\t---")
+    tic = time.perf_counter()
+    clf.fit(xtr, ytr)
+    toc = time.perf_counter()
+    print(f'Training time:\t {toc-tic:.4f} seconds')
+
+    tic = time.perf_counter()
+    predictions = clf.predict(xts)
+    toc = time.perf_counter()
+    print(f'Prediction time: {toc-tic:.4f} seconds')
+
+    print(f'Accuracy score:\t {accuracy_score(yts, predictions):.4f}')
+
     results = permutation_importance(clf, xts, yts, scoring='accuracy')
     importances = results.importances_mean
     print(f'Feature importance: {importances}')
