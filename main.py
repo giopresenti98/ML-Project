@@ -54,12 +54,7 @@ for clf in clfs:
 
     results = permutation_importance(clf, xts, yts, scoring='accuracy')
     importances = results.importances_mean
-    print('Feature importance:')
-
-    print(f'Password length: {importances[0]:.4f}')
-    print(f'Digits in password: {importances[1]:.4f}')
-    print(f'Symbols in password: {importances[2]:.4f}')
-    print(f'Uppercase letters in password: {importances[3]:.4f}')
+    print(f'Feature importance: {importances}')
 
     plot.feature_importance_histogram(importances, title=f'{clf}')
 

@@ -30,8 +30,9 @@ def plot_decision_regions(classifier, x, y, resolution=0.02, title=None, accurac
     plot_dataset(x, y)
     plt.xlim(xx1.min(), xx1.max())
     plt.ylim(xx2.min(), xx2.max())
-    plt.xlabel('Lenght of Password')
-    plt.ylabel('Numbers in Password')
+    plt.xlabel('Lenght of password')
+    plt.ylabel('Numbers in password')
+    
     plt.title(title, accuracy)
     plt.show()
     return
@@ -44,7 +45,8 @@ def feature_importance_histogram(importances, title=None):
             tick_label=[x for x in range(len(importances))],
             color=colors, edgecolor='black', linewidth=1.2, alpha=0.7)
     plt.xlabel('Feature')
-    plt.ylabel('Importance Score')
+    plt.ylabel('Importance score')
+    plt.xticks([0, 1, 2, 3], ["Lenght", "Digits", "Symbols", "Uppercase letters"])
     plt.title(title)
     plt.show()
   
