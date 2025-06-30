@@ -1,6 +1,4 @@
 import time
-import Plot
-from sklearn.inspection import permutation_importance
 from sklearn.metrics import accuracy_score
 
 def train_and_test(clf, xtr, xts, ytr, yts):
@@ -20,8 +18,4 @@ def train_and_test(clf, xtr, xts, ytr, yts):
 
     print(f'Accuracy score:\t {accuracy_score(yts, predictions):.4f}')
 
-    results = permutation_importance(clf, xtr, ytr, scoring='accuracy')
-    importances = results.importances_mean
-    print(f'Feature importance: {importances}')
-
-    Plot.feature_importance_histogram(importances, title=f'{clf}')
+    
