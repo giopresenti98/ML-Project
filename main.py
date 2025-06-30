@@ -11,16 +11,16 @@ import os
 import time
 from sklearn.metrics import accuracy_score
 
-N_TRAIN = 20000
-N_TEST = 50000
-
 # Load the dataset
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, 'Dataset/data.csv')
 data = pd.read_csv(filename, on_bad_lines='skip')
 # print(data)
 
-xtr, ytr, xts, yts = dt.feature_extractor(data, N_TRAIN, N_TEST)
+n_train = 20000
+n_test = 50000
+
+xtr, ytr, xts, yts = dt.feature_extractor(data, n_train, n_test)
 
 # Define the classifiers
 KNN_clf = KNeighborsClassifier(n_neighbors=6)
