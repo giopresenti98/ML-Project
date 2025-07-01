@@ -2,6 +2,23 @@ import numpy as np
 
 
 def feature_extractor(data, n_train, n_test):
+    """
+    Extracts and normalizes password features for training and testing from a given dataset.
+    Parameters:
+        data (pandas.DataFrame): The input DataFrame containing at least 'password' and 'strength' columns.
+        n_train (int): Number of samples to use for the training set.
+        n_test (int): Number of samples to use for the test set.
+    Returns:
+        tuple: A tuple containing:
+            - xtr (np.ndarray): Training feature matrix of shape (n_train, 4) with columns:
+                [password length, normalized digit count, normalized symbol count, normalized uppercase count].
+            - ytr (np.ndarray): Training target array of shape (n_train,).
+            - xts (np.ndarray): Test feature matrix of shape (n_test, 4) with the same columns as xtr.
+            - yts (np.ndarray): Test target array of shape (n_test,).
+    Notes:
+        - The dataset is shuffled before splitting.
+        - Feature normalization is performed by dividing counts by password length (with division by zero avoided).
+    """
     # Shuffle the dataset
     data_shuffled = data.sample(frac=1)  
 

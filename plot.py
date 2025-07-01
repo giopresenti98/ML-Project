@@ -7,10 +7,16 @@ from sklearn.metrics import confusion_matrix
 
 def plot_dataset(x, y, bins=20, title="Password Length Distribution by Strength"):
     """
-    Plots the distribution of password lengths grouped by strength as grouped bars.
-    x: feature matrix (password length should be the first column)
-    y: strength labels
+    Plots the distribution of password lengths grouped by their strength categories.
+    Parameters:
+        x (np.ndarray): 2D array where the first column contains password lengths.
+        y (np.ndarray): 1D array of class labels corresponding to password strength for each sample in x.
+        bins (int, optional): Number of bins to use for the histogram. Default is 20.
+        title (str, optional): Title of the plot. Default is "Password Length Distribution by Strength".
+    Displays:
+        A bar plot showing the distribution of password lengths for each strength class, with different colors and a legend.
     """
+    
     plt.figure(figsize=(10, 6))
     classes = np.unique(y)
     colors = ["red", "orange", "green", "blue", "purple", "cyan", "magenta"]
@@ -42,6 +48,17 @@ def plot_dataset(x, y, bins=20, title="Password Length Distribution by Strength"
 
 # Function to plot the confusion matrix
 def plot_confusion_matrix(y_test, y_pred, classifier_name):
+    """
+    Plots the confusion matrix for a given set of true and predicted labels using a heatmap.
+
+    Args:
+        y_test (array-like): True labels of the test dataset.
+        y_pred (array-like): Predicted labels from the classifier.
+        classifier_name (str): Name of the classifier to display in the plot title.
+
+    Returns:
+        None: Displays the confusion matrix plot.
+    """
     plt.figure(figsize=(5, 5))
     plt.title("Confusion Matrix of " + classifier_name)
     cm = confusion_matrix(y_test, y_pred)
@@ -52,6 +69,20 @@ def plot_confusion_matrix(y_test, y_pred, classifier_name):
 
 
 def feature_importance_histogram(importances, title=None):
+    """
+    Plots a histogram of feature importances.
+    Parameters
+    ----------
+    importances : list or array-like
+        The importance scores for each feature. The length should match the number of features.
+    title : str, optional
+        The title of the plot. Default is None.
+    Notes
+    -----
+    - The x-axis labels are fixed to ["Lenght", "Digits", "Symbols", "Uppercase letters"] for the first four features.
+    - The bar colors are cycled from a predefined list.
+    - Displays the plot using matplotlib's `plt.show()`.
+    """
     colors = ["black", "blue", "red", "lightgreen", "yellow", "magenta", "cyan"]
 
     plt.bar(

@@ -11,6 +11,16 @@ import os
 import time
 from sklearn.metrics import accuracy_score
 
+ # Machine Learning Project - Password Strength Classifiers
+# Simone Piras        70/90/00539   
+# Giovanni Presenti   70/90/00556
+# Alessia Tiddia      70/90/00501
+# This work aims to compare different classifiers for password strength prediction 
+# using a dataset of passwords with their respective strength labels.
+# The classifiers include K-Nearest Neighbors, Support Vector Machine, Decision Tree,
+# Decision Tree Regressor, Gaussian Naive Bayes, and Stochastic Gradient Descent
+# The dataset is loaded from a CSV file, and features are extracted to train and test the classifiers.
+
 # Constants to define the number of training and testing samples
 N_TRAIN = 500
 N_TEST = 50000  # n_test = len(data) - n_train
