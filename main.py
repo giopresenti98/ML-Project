@@ -11,6 +11,7 @@ import os
 import time
 from sklearn.metrics import accuracy_score
 
+# Constants to define the number of training and testing samples
 N_TRAIN = 500
 N_TEST = 50000  # n_test = len(data) - n_train
 
@@ -19,8 +20,8 @@ N_TEST = 50000  # n_test = len(data) - n_train
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, "Dataset/data.csv")
 data = pd.read_csv(filename, on_bad_lines="skip")
-# print(data)
 
+# Extract features and labels from the dataset
 xtr, ytr, xts, yts = dt.feature_extractor(data, N_TRAIN, N_TEST)
 
 # Define the classifiers
